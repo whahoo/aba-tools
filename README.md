@@ -92,9 +92,12 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 | 57   | Debenture/Note Interest                                                                 |
 
 
+# Licence
 
-# Other
+ * Copyright 2014 Ben (LB) Johnston <mail@lb.ee>
+ * ISC license Licensed under MIT (https://github.com/lb-/node-aba-generator/blob/master/LICENCE)
 
-## Style Guide
+
+# Style Guide
 
 Using https://github.com/meteor/meteor/wiki/Meteor-Style-Guide
