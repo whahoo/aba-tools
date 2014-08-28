@@ -1,4 +1,4 @@
-//uppercaseme.js
+//many items left from tutorial
 //http://www.anupshinde.com/posts/how-to-create-nodejs-npm-package/
 "use strict"
 var fs = require('fs');
@@ -18,4 +18,4 @@ function convertThis() {
   }
 }
 
-exports.convert = convertThis;
+exports.generate = convertThis;
