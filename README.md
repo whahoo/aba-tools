@@ -4,6 +4,14 @@ This is a Node module to support the generation of ABA files.
 An ABA file is the most common way in Australia to import batch transactions to use for online banking.
 This is different from the American Bankers Asciation format.
 
+## Usage
+
+Currently this is not usable, still building.
+
+'''bash
+  npm install aba-tools
+'''
+
 # ABA (Cemtex) File Format
 Source: http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
 
