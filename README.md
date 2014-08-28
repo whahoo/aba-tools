@@ -8,9 +8,9 @@ This is different from the American Bankers Asciation format.
 
 Currently this is not usable, still building.
 
-'''bash
+```bash
   npm install aba-tools
-'''
+```
 
 # ABA (Cemtex) File Format
 Source: http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
