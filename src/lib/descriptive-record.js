@@ -18,25 +18,6 @@ descriptiveRecord.columns = [
   { size: 40 }, //blank column
 ];
 
-
-//Should be part of the testing suite
-function checkColumns () {
-  var totalCharsInColumns =_.reduce(descriptiveRecord.columns, function (total, column) {
-    var errors = utils.columnSchema.validate(_.extend(utils.columnDefaults, column));
-    if (errors.length > 0) {
-      var er = 'Column has validation errors: ' + errors.toString();
-      throw er;
-    }
-    //console.log(column);
-    return total + column.size;
-  }, 1);//initial value is 1 as we do not define the record type column
-  if ( totalCharsInColumns !== 120 ) {
-    var er = 'Column Size Total should eqaul 120, it is ' + totalCharsInColumns;
-    throw er;
-  }
-}
-checkColumns();
-
 descriptiveRecord.schema = schema({
   seq: {
     type: 'number',
