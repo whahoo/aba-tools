@@ -90,3 +90,11 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 | 55   | Allotment                                                                               |
 | 56   | Dividend                                                                                |
 | 57   | Debenture/Note Interest                                                                 |
+
+
+
+# Other
+
+## Style Guide
+
+Using https://github.com/meteor/meteor/wiki/Meteor-Style-Guide

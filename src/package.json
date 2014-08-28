@@ -15,7 +15,9 @@
   "bin": {
     "uppercaseme": ".bin/uppercaseme"
   },
-  "dependencies": {},
+  "dependencies": {
+    "underscore": "1.7.0"
+  },
   "engines": {
     "node": "*"
   }
