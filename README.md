@@ -1,6 +1,6 @@
-# ABA File Generator
+# ABA Tools
 
-This is a program to support the generation of ABA files.
+This is a Node module to support the generation of ABA files.
 An ABA file is the most common way in Australia to import batch transactions to use for online banking.
 This is different from the American Bankers Asciation format.
 

@@ -1,12 +1,12 @@
 {
   "author": "LB Ben Johnston",
-  "name": "aba-generator",
+  "name": "aba-tools",
   "description": "Creates ABA files for batch banking in Australia",
   "version": "0.0.1",
   "repository": {
-    "url": ""
+    "url": "https://github.com/lb-/aba-tools"
   },
-  "main": "./lib/generate-aba",
+  "main": "./lib/main",
   "keywords": [
     "aba",
     "bank",
@@ -18,7 +18,7 @@
     "Association",
   ],
   "bin": {
-    "uppercaseme": ".bin/uppercaseme"
+    "uppercaseme": ".bin/aba-tools"
   },
   "dependencies": {
     "underscore": "*",
