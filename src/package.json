@@ -21,9 +21,9 @@
     "uppercaseme": ".bin/uppercaseme"
   },
   "dependencies": {
-    "underscore": "1.7.0",
-    "validate": "2.1.5",
-    "string": "1.9.1",
+    "underscore": "*",
+    "validate": "*",
+    "string": "*",
   },
   "engines": {
     "node": "*"
