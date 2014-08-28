@@ -24,6 +24,7 @@
     "underscore": "*",
     "validate": "*",
     "string": "*",
+    "error": "*",
   },
   "engines": {
     "node": "*"

@@ -1,11 +1,13 @@
 "use strict"
-//main libraries
+//external
 var assert = require('assert');
 var path = require('path');
 var fs = require('fs');
 var _ = require('underscore');
+var ValidationError = require("error/validation");
+var OptionError = require("error/option");
 
-//internal modules
+//internal
 var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../src/lib');
 var config = require(lib + '/config');
 var recordTypes = config.recordTypes;
@@ -14,9 +16,16 @@ var utils = require(lib + '/utils');
 var getEntry = utils.getEntry;
 var getRecord = utils.getRecord;
 
-describe('Descriptive Record', function () {
+function isValidationError(error) {
+  if ( error.type === 'ValidationError' ) {
+    return true;
+  }
+}
 
-  describe('# Columns Definition', function () {
+
+describe('# config', function () {
+
+  describe('Descriptive Columns', function () {
 
     it('should get a total of 120 characters', function () {
       var totalCharsInColumns =_.reduce(recordTypes.descriptive.columns, function (total, column) {
@@ -28,8 +37,8 @@ describe('Descriptive Record', function () {
 
     it('should validate each column against the column schema', function () {
       _.each(recordTypes.descriptive.columns, function(column) {
-        var errors = config.column.schema.validate(_.extend(config.column.defaultOptions, column));
-        assert.equal(0, errors);
+        var errors = config.column.schema.validate(_.extend(_.clone(config.column.defaultOptions), column));
+        assert.equal(0, errors.length);
       });
     });
 
@@ -37,20 +46,38 @@ describe('Descriptive Record', function () {
 
 });
 
-describe('getRecord()', function () {
-  var goodRecordOptions = {
-    seq: 1,
-    bankAbr: 'WBC',
-    userSpec: 'LIFE CHURCH',
-    userId: '252359',
-    description: 'Payments',
-    date: '311214',
-  };
 
-  it("should throw if type is not 'descriptive', 'detail' or 'file-total'", function () {
-    assert.throws(function () {getRecord('foo', goodRecordOptions)}, Error);
-    assert.throws(function () {getRecord('#', goodRecordOptions)}, Error);
+describe('# utils', function () {
+  var emptyOptions = {};
+
+  describe('getRecord()', function () {
+    var goodRecordOptions = {
+      seq: 1,
+      bankAbr: 'WBC',
+      userSpec: 'LIFE CHURCH',
+      userId: '252359',
+      description: 'Payments',
+      date: '311214',
+    };
+
+    it("should throw if type is not 'descriptive', 'detail' or 'file-total'", function () {
+      assert.throws(function () {getRecord('foo', goodRecordOptions)}, Error);
+      assert.throws(function () {getRecord('#', goodRecordOptions)}, Error);
+    });
+
   });
+
+  describe('getEntry()', function () {
+
+    it("should throw options do not validate", function () {
+      assert.throws(
+        function () {getEntry('foo', emptyOptions)},
+        isValidationError
+        );
+    });
+
+  });
+
 });
 
 

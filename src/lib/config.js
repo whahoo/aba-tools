@@ -24,23 +24,23 @@ config.column.schema = schema({
   size: {
     type: 'number',
     required: true,
-    message: 'Must be a number, the length of the field.',
+    message: 'size: Must be a number, the length of the field.',
   },
   key: {
     type: 'string',
     //required: false, //commented out as this works
-    message: 'Valid key in record options object',
+    message: 'key: Valid key in record options object',
   },
   fill: {
     type: 'string',
     required: true,
     match: new RegExp("^[0 ]$"),
-    message: 'Single padding character, usually a space or 0.',
+    message: 'fill: Single padding character, usually a space or 0.',
   },
   alignRight: {
     type: 'boolean',
-    required: true,
-    message: '',
+    //required: false,
+    message: 'alignRight: must be a boolean',
   },
 });
 
