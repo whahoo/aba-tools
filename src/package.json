@@ -1,22 +1,29 @@
 {
   "author": "LB Ben Johnston",
-  "name": "uppercaseme",
-  "description": "Converts files to uppercase",
-  "version": "0.1.1",
+  "name": "aba-generator",
+  "description": "Creates ABA files for batch banking in Australia",
+  "version": "0.0.1",
   "repository": {
     "url": ""
   },
-  "main": "./lib/uppercaseme",
+  "main": "./lib/generate-aba",
   "keywords": [
-    "upper",
-    "case",
-    "file"
+    "aba",
+    "bank",
+    "australia",
+    "cemtex",
+    "format",
+    "banking",
+    "bankers",
+    "Association",
   ],
   "bin": {
     "uppercaseme": ".bin/uppercaseme"
   },
   "dependencies": {
-    "underscore": "1.7.0"
+    "underscore": "1.7.0",
+    "validate": "2.1.5",
+    "string": "1.9.1",
   },
   "engines": {
     "node": "*"
