@@ -1,11 +1,53 @@
-// Descriptive Record
+"use strict"
 var schema = require('validate');
-var _ = require('underscore');
-var utils = require('./utils');
+var config = {};
 
-var descriptiveRecord = {};
+config.recordTypes = {
+  'descriptive': { id: '0' },
+  'detail': { id: '1' },
+  'file-total': { id: '7' },
+};
 
-descriptiveRecord.columns = [
+config.recordTypeNames = Object.keys(config.recordTypes);
+
+//column set up
+
+config.column = {};
+
+config.column.defaultOptions = {
+  fill: ' ',
+  key: null,
+  alignRight: true,
+};
+
+config.column.schema = schema({
+  size: {
+    type: 'number',
+    required: true,
+    message: 'Must be a number, the length of the field.',
+  },
+  key: {
+    type: 'string',
+    //required: false, //commented out as this works
+    message: 'Valid key in record options object',
+  },
+  fill: {
+    type: 'string',
+    required: true,
+    match: new RegExp("^[0 ]$"),
+    message: 'Single padding character, usually a space or 0.',
+  },
+  alignRight: {
+    type: 'boolean',
+    required: true,
+    message: '',
+  },
+});
+
+
+
+//descriptive record
+config.recordTypes.descriptive.columns = [
   //first column is not included, always a 1char ID
   { size: 17 }, //blank column
   { size: 2, key: 'seq', fill: '0', alignRight: true },
@@ -18,7 +60,7 @@ descriptiveRecord.columns = [
   { size: 40 }, //blank column
 ];
 
-descriptiveRecord.schema = schema({
+config.recordTypes.descriptive.schema = schema({
   seq: {
     type: 'number',
     required: true,
@@ -57,29 +99,4 @@ descriptiveRecord.schema = schema({
   }
 });
 
-//expose this schema
-module.exports = descriptiveRecord;
-
-//expose tests
-//module.exports = tests;
-
-//testing stuff
-function tests() {
-  console.log('Empty Object ', descriptiveRecord.validate({}));
-  console.log('Should Fail ', descriptiveRecord.validate({
-    seq: 1,
-    bankAbr: 'WBCA',
-    userSpec: '',
-    userId: '',
-    description: 'Payments ULTURA LUNGH ANMAM',
-    date: '31122014',
-  }));
-  console.log('Should Pass ', descriptiveRecord.validate({
-    seq: 1,
-    bankAbr: 'WBC',
-    userSpec: 'LIFE CHURCH',
-    userId: '252359',
-    description: 'Payments',
-    date: '311214',
-  }));
-}
+module.exports = config;
