@@ -70,7 +70,7 @@ config.recordTypes.descriptive.schema = schema({
   bankAbr: {
     type: 'string',
     required: true,
-    match: new RegExp("^.{3}$"),
+    match: new RegExp("^[.A-Z]{3}$"),
     message: "bankAbr: 3 chars. Must be approved Financial Institution abbreviation.",
   },
   userSpec: {
