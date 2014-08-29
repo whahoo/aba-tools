@@ -95,23 +95,33 @@ config.recordTypes.detail.schema = Joi.object().keys({
   toRef: Joi.string().regex(/^[1-9A-Za-z]{1}[0-9A-Za-z ]{0,17}$/).required(),
   toBsb: Joi.string().regex(bsbRegex).required(),
   toAcc: Joi.required(),
-  indicator: Joi.string().valid([' ','N','W','X','Y']).optional().default(' '),
+  indicator: Joi.string().valid([' ','N','W','X','Y']).required().default(' '),
+  //indicator: Joi.string().default('sdfads'),
   transaction: Joi.number().valid([13,50,51,52,53,54,55,56,57]).optional().default(53),
   amount: Joi.number().min(1).max(99999999).required(),
-  tax: Joi.number().min(1).max(999999).required(),
+  tax: Joi.number().min(0).max(999999).optional().default(0),
 });
 
 //File Total Record
 
 config.recordTypes.total.columns = [
   firstColumn,
-  { size: 7, key: 'bsb-filler' },//Must be '999-999'
+  { size: 7, blank: true,  parse: parse.bsbFill },//Must be '999-999'
   { size: 12, blank: true, parse: parse.default },
-  //amounts...
+  { size: 10, key: 'totalNet', parse: parse.amount },
+  { size: 10, key: 'totalCredit', parse: parse.amount },
+  { size: 10, key: 'totalDebit', parse: parse.amount },
   { size: 24, blank: true, parse: parse.default },
-  // file user count of records type 1
+  { size: 6, key: 'count', fill: '0', justify: 'right', parse: parse.default },
   { size: 40, blank: true, parse: parse.default },
 ];
+
+config.recordTypes.total.schema = Joi.object().keys({
+  totalNet: Joi.number().min(1).max(99999999).required(),
+  totalCredit: Joi.number().min(1).max(99999999).required(),
+  totalDebit: Joi.number().min(1).max(99999999).required(),
+  count: Joi.number().required(),
+});
 
 
 module.exports = config;

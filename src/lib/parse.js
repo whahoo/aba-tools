@@ -5,6 +5,7 @@ var moment = require('moment');
 var parse = {};
 
 parse.default = function parseValue(value) {
+  console.log('this', this, 'value', value);
   var self = this;//will be the column definition
   //console.log('this',this, 'value',value);
   return value.toString().trim().substr(0, self.size);
@@ -21,5 +22,9 @@ parse.date = function parseDate(value) {
   //console.log('this',this, 'value',value);
   //return 'DDMMYY';//value.toString().trim().substr(0, self.size);
 };
+
+parse.bsbFill = function () {
+  return '999-999';
+}
 
 module.exports = parse;
