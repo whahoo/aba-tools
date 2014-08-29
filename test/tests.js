@@ -20,7 +20,23 @@ function isValidationError(error) {
   if ( error.type === 'ValidationError' ) {
     return true;
   }
-}
+};
+
+function testBadValues (fieldKey, badValues, recordOptions) {
+  var badValues = badValues || [];
+  var fieldKey = fieldKey || 'title not provided';
+  _.each(badValues, function (badValue) {
+    var i = {};
+    i[fieldKey] = badValue;
+    var badOptions = _.extend(_.clone(recordOptions), i);
+    if (badValue === 'not provided') {
+      delete badOptions[fieldKey];
+    }
+    it("should throw if " + fieldKey + " is [ " + badValue + " ]", function () {
+      assert.throws(function () { getRecord('descriptive', badOptions) }, Error);
+    });
+  });
+};
 
 
 describe('# config', function () {
@@ -37,7 +53,8 @@ describe('# config', function () {
 
     it('should validate each column against the column schema', function () {
       _.each(recordTypes.descriptive.columns, function(column) {
-        var errors = config.column.schema.validate(_.extend(_.clone(config.column.defaultOptions), column));
+        //var errors = config.column.schema.validate(_.extend(_.clone(config.column.defaultOptions), column));
+        var errors = config.column.schema.validate(_.defaults(column, config.column.defaultOptions));
         assert.equal(0, errors.length);
       });
     });
@@ -65,6 +82,47 @@ describe('# utils', function () {
       assert.throws(function () {getRecord('#', goodRecordOptions)}, Error);
     });
 
+    describe('descriptive record', function () {
+      var recordOutput = "0                 01WBC       LIFE CHURCH               252359Payments    290814                                        ";
+      var recordOptions = {
+        seq: 1,
+        bankAbr: 'WBC',
+        userSpec: 'LIFE CHURCH',
+        userId: '252359',
+        description: 'Payments',
+        date: '290814',
+      };
+
+      it("should return a valid descriptive record", function () {
+        assert.equal(recordOutput, getRecord('descriptive', recordOptions));
+      });
+
+      describe('seq', function () {
+        testBadValues( this.title, ['not provided', null, undefined, '3', 'a'], recordOptions);
+      });
+
+      describe('bankAbr', function () {
+        testBadValues( this.title, ['not provided', null, undefined, 'a', 'ab', 'abcd', '###', 123, '123'], recordOptions);
+      });
+
+      describe('userSpec', function () {
+        testBadValues( this.title, ['not provided', null, undefined, '',], recordOptions);
+      });
+
+      describe('userId', function () {
+        testBadValues( this.title, ['not provided', null, undefined, ''], recordOptions);
+      });
+
+      describe('description', function () {
+        testBadValues( this.title, ['not provided', null, undefined, '', 'very long description', 1232344], recordOptions);
+      });
+
+      describe('date', function () {
+        testBadValues( this.title, ['not provided', null, undefined, 'a', 'ab', 'abcd', '###', 123456], recordOptions);
+      });
+
+    });
+
   });
 
   describe('getEntry()', function () {
@@ -79,26 +137,3 @@ describe('# utils', function () {
   });
 
 });
-
-
-
-
-// function tests() {
-//   console.log('Empty Object ', descriptiveRecord.validate({}));
-//   console.log('Should Fail ', descriptiveRecord.validate({
-//     seq: 1,
-//     bankAbr: 'WBCA',
-//     userSpec: '',
-//     userId: '',
-//     description: 'Payments ULTURA LUNGH ANMAM',
-//     date: '31122014',
-//   }));
-//   console.log('Should Pass ', descriptiveRecord.validate({
-//     seq: 1,
-//     bankAbr: 'WBC',
-//     userSpec: 'LIFE CHURCH',
-//     userId: '252359',
-//     description: 'Payments',
-//     date: '311214',
-//   }));
-// }
