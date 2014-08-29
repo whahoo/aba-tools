@@ -11,4 +11,13 @@ var path = require('path');
 var fs = require('fs');
 var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 
-require(lib+'/generate-aba.js').getRecord();
+var goodRecordOptions = {
+  seq: 1,
+  bankAbr: 'WBC',
+  userSpec: 'LIFE CHURCH',
+  userId: '252359',
+  description: 'Payments',
+  date: '311214',
+};
+
+console.log(require(lib+'/main.js').getRecord('descriptive', goodRecordOptions));

@@ -1,6 +1,14 @@
 "use strict"
-var schema = require('validate');
+//external
+//var schema = require('validate');
+var Joi = require('joi');
+
 var config = {};
+
+config.joi = {
+  abortEarly: false,
+  stripUnknown: true,
+};
 
 config.recordTypes = {
   'descriptive': { id: '0' },
@@ -11,37 +19,22 @@ config.recordTypes = {
 config.recordTypeNames = Object.keys(config.recordTypes);
 
 //column set up
+function parseValue(value) {
+  var self = this;//will be the column definition
+  //console.log('this',this, 'value',value);
+  return value.toString().trim().substr(0, self.size);
+}
+
 
 config.column = {};
 
-config.column.defaultOptions = {
-  fill: ' ',
-  key: null,
-  alignRight: true,
-};
-
-config.column.schema = schema({
-  size: {
-    type: 'number',
-    required: true,
-    message: 'size: Must be a number, the length of the field.',
-  },
-  key: {
-    type: 'string',
-    //required: false, //commented out as this works
-    message: 'key: Valid key in record options object',
-  },
-  fill: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^[0 ]$"),
-    message: 'fill: Single padding character, usually a space or 0.',
-  },
-  alignRight: {
-    type: 'boolean',
-    //required: false,
-    message: 'alignRight: must be a boolean',
-  },
+config.column.schema = Joi.object().keys({
+  size: Joi.number().min(1).max(40).required(),//max column size in spec
+  blank: Joi.boolean().optional().default(false),
+  key: Joi.string().token().optional(),
+  fill: Joi.any().valid([' ', '0']).optional().default(' '),
+  justify: Joi.string().valid(['left', 'right']).optional().default('left'),
+  parse: Joi.func().required(),
 });
 
 
@@ -49,74 +42,45 @@ config.column.schema = schema({
 //Descriptive Record
 
 config.recordTypes.descriptive.columns = [
-  //first column is not included, always a 1char ID
-  { size: 17 }, //blank column
-  { size: 2, key: 'seq', fill: '0', alignRight: true },
-  { size: 3, key: 'bankAbr' },
-  { size: 7 }, //blank column
-  { size: 26, key: 'userSpec', fill: ' ', alignRight: false },
-  { size: 6, key: 'userId', fill: '0', alignRight: true },
-  { size: 12, key: 'description', fill: ' ', alignRight: false },
-  { size: 6, key: 'date'},
-  { size: 40 }, //blank column
+  { size: 1, key: 'typeId', parse: parseValue }, //first column is not included, always a 1 char ID
+  { size: 17, blank: true, parse: parseValue },
+  { size: 2, key: 'seq', fill: '0', justify: 'left', parse: parseValue },
+  { size: 3, key: 'bankAbr', parse: parseValue },
+  { size: 7, blank: true, parse: parseValue },
+  { size: 26, key: 'userSpec', fill: ' ', justify: 'right', parse: parseValue },
+  { size: 6, key: 'userId', fill: '0', justify: 'left', parse: parseValue },
+  { size: 12, key: 'description', fill: ' ', justify: 'right', parse: parseValue },
+  { size: 6, key: 'date', parse: parseValue },
+  { size: 40, blank: true, parse: parseValue },
 ];
 
-config.recordTypes.descriptive.schema = schema({
-  seq: {
-    type: 'number',
-    required: true,
-    match: new RegExp("(0?[1-9]|[1-9][0-9])"),
-    message: "seq: Reel Sequence Number. Must be numeric commencing at 1.",
-  },
-  bankAbr: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^[.A-Z]{3}$"),
-    message: "bankAbr: 3 chars. Must be approved Financial Institution abbreviation.",
-  },
-  userSpec: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^.{1,26}$"),
-    message: "userSpec: 1 to 26 chars. Must be User Preferred Specification as advised by User's FI",
-  },
-  userId: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^.{1,6}$"),
-    message: "userId: 1 to 6 chars. Must be User Identification Number which is allocated by APCA",
-  },
-  description: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^.{1,12}$"),
-    message: "description: 1 to 12 chars. All coded character set valid. Must not be all blanks",
-  },
-  date: {
-    type: 'string',
-    required: true,
-    match: new RegExp("^([0-9]{2})([0-9]{2})([0-9]{2})$"),
-    message: "date: Must be numeric in the format of DDMMYY.",
-  }
+config.recordTypes.descriptive.schema = Joi.object().keys({
+  seq: Joi.number().min(1).max(99).required(),
+  bankAbr: Joi.string().length(3).alphanum().uppercase().trim().required(),
+  userSpec: Joi.string().allow(' ').min(1).max(26).trim().required(),
+  userId: Joi.number().min(1).max(999999).required(),
+  description: Joi.string().min(1).max(12).alphanum().trim().required(),
+  date: Joi.date().required(),
 });
+
 
 
 //Detail Record
 
-config.recordTypes.detail.columns = [
-  //first column is not included, always a 1char ID
-  { size: 7, key: 'bsb'},
-  { size: 9, key: 'acc', fill: ' ', alignRight: true },
-  { size: 1, key: 'indicator', fill: ' ' },
-  { size: 2, key: 'trCode' },
-  { size: 10, key: 'amount', fill: '0', alignRight: true },
-  { size: 32, key: 'accountTitle', fill: ' ', alignRight: false },
-  { size: 18, key: 'reference', fill: ' ', alignRight: false },
-  { size: 7, key: 'trace' },
-  { size: 9, key: 'accountNumber', fill: ' ', alignRight: true },
-  { size: 16, key: 'remitter', fill: ' ', alignRight: true },
-  { size: 8, key: 'tax', fill: '0', alignRight: true },
-];
+// config.recordTypes.detail.columns = [
+//   //first column is not included, always a 1char ID
+//   { size: 7, key: 'bsb'},
+//   { size: 9, key: 'acc', fill: ' ', alignRight: true },
+//   { size: 1, key: 'indicator', fill: ' ' },
+//   { size: 2, key: 'trCode' },
+//   { size: 10, key: 'amount', fill: '0', alignRight: true },
+//   { size: 32, key: 'accountTitle', fill: ' ', alignRight: false },
+//   { size: 18, key: 'reference', fill: ' ', alignRight: false },
+//   { size: 7, key: 'trace' },
+//   { size: 9, key: 'accountNumber', fill: ' ', alignRight: true },
+//   { size: 16, key: 'remitter', fill: ' ', alignRight: true },
+//   { size: 8, key: 'tax', fill: '0', alignRight: true },
+// ];
 
 
 module.exports = config;

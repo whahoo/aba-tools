@@ -26,9 +26,8 @@
   },
   "dependencies": {
     "underscore": "*",
-    "validate": "*",
+    "joi": "*",
     "string": "*",
-    "error": "*"
   },
   "engines": {
     "node": "*"
