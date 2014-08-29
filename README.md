@@ -96,7 +96,7 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 # Licence
 
  * Copyright 2014 Ben (LB) Johnston <mail@lb.ee>
- * ISC license Licensed under MIT (https://github.com/lb-/node-aba-generator/blob/master/LICENCE)
+ * ISC license Licensed under MIT (https://github.com/lb-/aba-tools/blob/master/LICENCE)
 
 
 # Style Guide
