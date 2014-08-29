@@ -57,7 +57,7 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 | 63-80    | 18         | Lodgement Reference                     | All coded character set valid. Field must be left justified. No leading spaces, zeroes, hyphens or other characters can be included.                                                                         |
 | 81-87    | 9          | Account Number                          | Right justified, blank filled.                                                                                                                                                                               |
 | 97-112   | 16         | Name of Remitter                        | Name of originator of the entry. This may vary from Name of the User. All coded character set valid. Must not contain all blanks. Left justified, blank filled.                                              |
-| 113-120  | 8          | Amount of Withholding Tax               |                                                                                                                                                                                                              |
+| 113-120  | 8          | Amount of Withholding Tax               | Numeric only valid. Show in cents without punctuation. Right justified, zero filled. Unsigned.                                                                                                               |
 
 *Note: all fields must be completed*
 
