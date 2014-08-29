@@ -40,25 +40,26 @@ function testBadValues (fieldKey, badValues, recordOptions) {
 
 
 describe('# config', function () {
+  _.each(['descriptive', 'detail'], function (type) {
+    describe('Config for ' + type + ' Columns', function () {
 
-  describe('Descriptive Columns', function () {
-
-    it('should get a total of 120 characters', function () {
-      var totalCharsInColumns =_.reduce(recordTypes.descriptive.columns, function (total, column) {
-        return total + column.size;
-      }, 1);
-      //initial value is 1 as we do not define the record type column
-      assert.equal(120, totalCharsInColumns);
-    });
-
-    it('should validate each column against the column schema', function () {
-      _.each(recordTypes.descriptive.columns, function(column) {
-        //var errors = config.column.schema.validate(_.extend(_.clone(config.column.defaultOptions), column));
-        var errors = config.column.schema.validate(_.defaults(column, config.column.defaultOptions));
-        assert.equal(0, errors.length);
+      it('should get a total of 120 characters', function () {
+        var totalCharsInColumns =_.reduce(recordTypes[type].columns, function (total, column) {
+          return total + column.size;
+        }, 1);
+        //initial value is 1 as we do not define the record type column
+        assert.equal(120, totalCharsInColumns);
       });
-    });
 
+      it('should validate each column against the column schema', function () {
+        _.each(recordTypes[type].columns, function(column) {
+          var errors = config.column.schema.validate(_.defaults(column, config.column.defaultOptions));
+          assert.equal(0, errors.length);
+        });
+      });
+
+
+    });
   });
 
 });
