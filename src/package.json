@@ -28,6 +28,7 @@
     "underscore": "*",
     "joi": "*",
     "string": "*",
+    "moment": "*",
   },
   "engines": {
     "node": "*"
