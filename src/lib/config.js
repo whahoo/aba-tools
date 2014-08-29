@@ -15,7 +15,7 @@ config.joi = {
 config.recordTypes = {
   'descriptive': { id: '0' },
   'detail': { id: '1' },
-  'file-total': { id: '7' },
+  'total': { id: '7' },
 };
 
 config.recordTypeNames = Object.keys(config.recordTypes);
@@ -100,6 +100,18 @@ config.recordTypes.detail.schema = Joi.object().keys({
   amount: Joi.number().min(1).max(99999999).required(),
   tax: Joi.number().min(1).max(999999).required(),
 });
+
+//File Total Record
+
+config.recordTypes.total.columns = [
+  firstColumn,
+  { size: 7, key: 'bsb-filler' },//Must be '999-999'
+  { size: 12, blank: true, parse: parse.default },
+  //amounts...
+  { size: 24, blank: true, parse: parse.default },
+  // file user count of records type 1
+  { size: 40, blank: true, parse: parse.default },
+];
 
 
 module.exports = config;
