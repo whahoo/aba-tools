@@ -15,16 +15,20 @@
     "format",
     "banking",
     "bankers",
-    "Association",
+    "Association"
   ],
   "bin": {
     "uppercaseme": ".bin/aba-tools"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-banner": "*"
   },
   "dependencies": {
     "underscore": "*",
     "validate": "*",
     "string": "*",
-    "error": "*",
+    "error": "*"
   },
   "engines": {
     "node": "*"
