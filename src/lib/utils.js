@@ -23,7 +23,8 @@ function getValErrors (validationErrors) {
 
 function getEntry(value, options) {
   var result, entry;
-  var options = _.extend(_.clone(config.column.defaultOptions), options);
+  //var options = _.extend(_.clone(config.column.defaultOptions), options);
+  var options = _.defaults(options, config.column.defaultOptions);
   var errors = config.column.schema.validate(options);
   if (errors.length > 0) {
     throw new ValidationError(getValErrors(errors));
@@ -50,41 +51,32 @@ function getRecord(type, options) {
   }
 
   typeId = recordTypes[type].id;
+  result = typeId;
+
   var errors = recordTypes[type].schema.validate(options);
   if (errors.length > 0) {
     throw new ValidationError(getValErrors(errors));
   } else {
-    //to do
-  }
+    //initiate the record with the first element
+    //starts with 'type' which will be 0, 1 or 7
+    var columns = recordTypes[type].columns;
+    if (columns.length < 8 ) {
+      throw new Error('There should be at least 8 columns', columns);
+    }
+    _.each(columns, function(column) {
+      //Set default value to empty string
+      //or get the value from options
+      var value = '';
+      if (column.key) {
+        value = options[column.key];
+      }
+      result += getEntry(value, column);
+    });
 
-  // if (type === 'descriptive') {
-  //   var descriptive = recordTypes.descriptive;
-  //   var errors = descriptive.schema.validate(options);
-  //   if (errors.length > 0) {
-  //     throw new Error(errors);
-  //   } else {
-  //     //initiate the record with the first element
-  //     //starts with 'type' which will be 0, 1 or 7
-  //     var result = typeId;
-  //     var columns = descriptiveRecord.columns;
-  //     if (columns.length < 8 ) {
-  //       throw new Error('There should be at least 8 columns');
-  //     }
-  //     _.each(descriptiveRecord.columns, function(column) {
-  //       //Set default value to empty string
-  //       //or get the value from options
-  //       var value = '';
-  //       if (column.key) {
-  //         value = options[column.key];
-  //       }
-  //       result += getEntry(value, column);
-  //     })
-  //
-  //     if (! result.length === 120) {
-  //       throw new Error('Record length must be exactly 120 characters');
-  //     }
-  //   }
-  // }
+    if (! result.length === 120) {
+      throw new Error('Record length must be exactly 120 characters');
+    }
+  }
   return result;
 }
 
