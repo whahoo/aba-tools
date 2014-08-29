@@ -46,7 +46,8 @@ config.column.schema = schema({
 
 
 
-//descriptive record
+//Descriptive Record
+
 config.recordTypes.descriptive.columns = [
   //first column is not included, always a 1char ID
   { size: 17 }, //blank column
@@ -98,5 +99,24 @@ config.recordTypes.descriptive.schema = schema({
     message: "date: Must be numeric in the format of DDMMYY.",
   }
 });
+
+
+//Detail Record
+
+config.recordTypes.detail.columns = [
+  //first column is not included, always a 1char ID
+  { size: 7, key: 'bsb'},
+  { size: 9, key: 'acc', fill: ' ', alignRight: true },
+  { size: 1, key: 'indicator', fill: ' ' },
+  { size: 2, key: 'trCode' },
+  { size: 10, key: 'amount', fill: '0', alignRight: true },
+  { size: 32, key: 'accountTitle', fill: ' ', alignRight: false },
+  { size: 18, key: 'reference', fill: ' ', alignRight: false },
+  { size: 7, key: 'trace' },
+  { size: 9, key: 'accountNumber', fill: ' ', alignRight: true },
+  { size: 16, key: 'remitter', fill: ' ', alignRight: true },
+  { size: 8, key: 'tax', fill: '0', alignRight: true },
+];
+
 
 module.exports = config;
