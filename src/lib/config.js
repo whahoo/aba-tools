@@ -6,7 +6,7 @@
 var Joi = require('joi');
 
 //internal
-var parse = require('./parse');
+var as = require('./format');
 
 var config = {};
 
@@ -29,7 +29,7 @@ config.recordTypeNames = Object.keys(config.recordTypes);
 var firstColumn = {
   size: 1,
   key: 'typeId',
-  parse: parse.default
+  format: as.v
 };
 //bsb stands for bank state branch. Standard format is ###-###
 //http://en.wikipedia.org/wiki/Bank_State_Branch
@@ -52,13 +52,13 @@ config.column.schema = Joi.object().keys({
   //some columns require space fills, others require zero fil
   //eg. account number 1235 would become 000001245
   fill: Joi.any().valid([' ', '0']).optional().default(' '),
-  //the spec uses the term justify, this determines the padding directi
-  eg. right justify padding with zeroes would make 33456 into 334560000000*/
+  //the spec uses the term justify, this determines the padding direction
+  //eg. right justify padding with zeroes would make 33456 into 334560000000
   justify: Joi.string().valid(['left', 'right']).optional().default('left'),
-  //function provided for the column to parse the entry, this is mostly f
-  formatting, in some cases it will provide additional transformation*/
-  //task: I could not get the .default(parse.default) to work, need to look at Joi
-  parse: Joi.func().required(),
+  //function provided for the column to parse the entry, this is mostly for
+  //formatting, in some cases it will provide additional transformation
+  //task: I could not get the .default(as.v) to work, need to look at Joi
+  format: Joi.func().required(),
 });
 
 
@@ -68,15 +68,15 @@ config.column.schema = Joi.object().keys({
 //It provides details of the transaction as a whole
 config.recordTypes.descriptive.columns = [
   firstColumn,
-  { size: 17, blank: true, parse: parse.default },
-  { size: 2, key: 'sequence', fill: '0', justify: 'right', parse: parse.default },
-  { size: 3, key: 'bank', parse: parse.default },
-  { size: 7, blank: true, parse: parse.default },
-  { size: 26, key: 'userName', fill: ' ', justify: 'left', parse: parse.default },
-  { size: 6, key: 'userId', fill: '0', justify: 'right', parse: parse.default },
-  { size: 12, key: 'description', fill: ' ', justify: 'left', parse: parse.default },
-  { size: 6, key: 'date', parse: parse.date },
-  { size: 40, blank: true, parse: parse.default },
+  { size: 17, blank: true, format: as.v },
+  { size: 2, key: 'sequence', fill: '0', justify: 'right', format: as.v },
+  { size: 3, key: 'bank', format: as.v },
+  { size: 7, blank: true, format: as.v },
+  { size: 26, key: 'userName', fill: ' ', justify: 'left', format: as.v },
+  { size: 6, key: 'userId', fill: '0', justify: 'right', format: as.v },
+  { size: 12, key: 'description', fill: ' ', justify: 'left', format: as.v },
+  { size: 6, key: 'date', format: as.date },
+  { size: 40, blank: true, format: as.v },
 ];
 
 config.recordTypes.descriptive.schema = Joi.object().keys({
@@ -107,17 +107,17 @@ config.recordTypes.descriptive.schema = Joi.object().keys({
 
 config.recordTypes.detail.columns = [
   firstColumn,
-  { size: 7, key: 'fromBsb', parse: parse.default },
-  { size: 9, key: 'fromAcc', fill: ' ', justify: 'right', parse: parse.default },
-  { size: 1, key: 'indicator', fill: ' ', parse: parse.default },
-  { size: 2, key: 'transaction', parse: parse.default },
-  { size: 10, key: 'amount', fill: '0', justify: 'right', parse: parse.amount },
-  { size: 32, key: 'toName', fill: ' ', justify: 'left', parse: parse.default },
-  { size: 18, key: 'toRef', fill: ' ', justify: 'left', parse: parse.default },
-  { size: 7, key: 'toBsb', parse: parse.default },
-  { size: 9, key: 'toAcc', fill: ' ', justify: 'right', parse: parse.default },
-  { size: 16, key: 'fromName', fill: ' ', justify: 'left', parse: parse.default },
-  { size: 8, key: 'tax', fill: '0', justify: 'right', parse: parse.amount },
+  { size: 7, key: 'fromBsb', format: as.v },
+  { size: 9, key: 'fromAcc', fill: ' ', justify: 'right', format: as.v },
+  { size: 1, key: 'indicator', fill: ' ', format: as.v },
+  { size: 2, key: 'transaction', format: as.v },
+  { size: 10, key: 'amount', fill: '0', justify: 'right', format: as.vmount },
+  { size: 32, key: 'toName', fill: ' ', justify: 'left', format: as.v },
+  { size: 18, key: 'toRef', fill: ' ', justify: 'left', format: as.v },
+  { size: 7, key: 'toBsb', format: as.v },
+  { size: 9, key: 'toAcc', fill: ' ', justify: 'right', format: as.v },
+  { size: 16, key: 'fromName', fill: ' ', justify: 'left', format: as.v },
+  { size: 8, key: 'tax', fill: '0', justify: 'right', format: as.vmount },
 ];
 
 config.recordTypes.detail.schema = Joi.object().keys({
@@ -155,14 +155,14 @@ config.recordTypes.detail.schema = Joi.object().keys({
 config.recordTypes.total.columns = [
   firstColumn,
   //Odd requirement, must always be '999-999' and only ever that
-  { size: 7, blank: true,  parse: parse.bsbFill },
-  { size: 12, blank: true, parse: parse.default },
-  { size: 10, key: 'totalNet', parse: parse.amount },
-  { size: 10, key: 'totalCredit', parse: parse.amount },
-  { size: 10, key: 'totalDebit', parse: parse.amount },
-  { size: 24, blank: true, parse: parse.default },
-  { size: 6, key: 'count', fill: '0', justify: 'right', parse: parse.default },
-  { size: 40, blank: true, parse: parse.default },
+  { size: 7, blank: true,  format: as.bsbFill },
+  { size: 12, blank: true, format: as.v },
+  { size: 10, key: 'totalNet', format: as.vmount },
+  { size: 10, key: 'totalCredit', format: as.vmount },
+  { size: 10, key: 'totalDebit', format: as.vmount },
+  { size: 24, blank: true, format: as.v },
+  { size: 6, key: 'count', fill: '0', justify: 'right', format: as.v },
+  { size: 40, blank: true, format: as.v },
 ];
 
 config.recordTypes.total.schema = Joi.object().keys({
