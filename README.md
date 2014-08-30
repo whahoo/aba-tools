@@ -92,6 +92,104 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 | 56   | Dividend                                                                                |
 | 57   | Debenture/Note Interest                                                                 |
 
+## Bank Codes
+Source: http://www.thebsbnumbers.com/
+*Note: This may not be a complete list*
+
+| Number      | Code        | Bank Name                                                           |
+|-------------|-------------|---------------------------------------------------------------------|
+| 01          | ANZ         | Australia and New Zealand Banking Group                             |
+| 03 or 73    | WBC         | Westpac Banking Corporation                                         |
+| 06 or 76    | CBA         | Commonwealth Bank of Australia                                      |
+| 08 or 78    | NAB         | National Australia Bank                                             |
+| 09          | RBA         | Reserve Bank of Australia                                           |
+| 10          | BSA         | BankSA (division of Westpac Bank)                                   |
+| 11 and 33   | STG and SGP | St George Bank (division of Westpac Bank)                           |
+| 12          | BQL         | Bank of Queensland                                                  |
+| 14          | PIB         | Rabobank                                                            |
+| 15          | T&C         | Town & Country Bank                                                 |
+| 18          | MBL         | Macquarie Bank                                                      |
+| 19 and 55   | BOM and BML | Bank of Melbourne (division of Westpac Bank)                        |
+| 21          | CMB         | JP Morgan Chase Bank                                                |
+| 22          | BNP         | BNP Paribas                                                         |
+| 23          | BAL         | Bank of America                                                     |
+| 24          | CTI         | Citibank                                                            |
+| 25          | BPS         | BNP Paribas Securities                                              |
+| 26          | BTA         | Bankers Trust Australia (division of Westpac Bank)                  |
+| 29          | BOT         | Bank of Tokyo-Mitsubishi                                            |
+| 30          | BWA         | Bankwest (division of Commonwealth Bank)                            |
+| 31          | MCU         | Bankmecu                                                            |
+| 34 and 985  | HBA and HSB | HSBC Bank Australia                                                 |
+| 35          | BOC         | Bank of China                                                       |
+| 40          | CST         | Commonwealth Bank of Australia                                      |
+| 41          | DBA         | Deutsche Bank                                                       |
+| 42 and 52   | TBT         | Commonwealth Bank of Australia                                      |
+| 45          | OCB         | OCBC Bank                                                           |
+| 46          | ADV         | Advance Bank (division of Westpac Bank)                             |
+| 47          | CBL         | Challenge Bank (division of Westpac Bank)                           |
+| 48 or 664   | MET or SUN  | Suncorp-Metway                                                      |
+| 512         | CFC         | Community First Credit Union                                        |
+| 514         | QTM         | QT Mutual Bank                                                      |
+| 57          | ASL         | Australian Settlements                                              |
+| 61          | ADL         | Adelaide Bank (division of Bendigo and Adelaide Bank)               |
+| 611         | SEL         | Select Credit Union                                                 |
+| 630         | ABS         | ABS Building Society                                                |
+| 632         | BAE         | B&E                                                                 |
+| 633         | BBL         | Bendigo Bank                                                        |
+| 634         | UFS         | Uniting Financial Services                                          |
+| 637         | GBS         | Greater Building Society                                            |
+| 638 and 880 | HBS         | Heritage Bank                                                       |
+| 639         | HOM         | Home Building Society (division of Bank of Queensland)              |
+| 640         | HUM         | Hume Bank                                                           |
+| 641 and 647 | IMB and AUB | IMB                                                                 |
+| 642         | ADC         | Australian Defence Credit Union                                     |
+| 645 and 656 | MPB and BAY | Wide Bay Australia                                                  |
+| 646         | MMB         | Maitland Mutual Building Society                                    |
+| 650         | NEW         | Newcastle Permanent Building Society                                |
+| 653         | PPB         | Pioneer Permanent Building Society (division of Bank of Queensland) |
+| 655         | ROK         | The Rock Building Society                                           |
+| 657         | GBS         | Greater Building Society                                            |
+| 659         | SGE         | SGE Credit Union                                                    |
+| 676         | GTW         | Gateway Credit Union                                                |
+| 70          | CUS         | Indue                                                               |
+| 721         | HCC         | Holiday Coast Credit Union                                          |
+| 722         | SNX         | Southern Cross Credit                                               |
+| 723         | HIC         | Heritage Isle Credit Union                                          |
+| 724         | RCU         | Railways Credit Union                                               |
+| 728         | SCU         | Summerland Credit Union                                             |
+| 777         | PNB         | Police & Nurse                                                      |
+| 80          | CRU         | Cuscal                                                              |
+| 812         | TMB         | Teachers Mutual Bank                                                |
+| 813         | CAP         | Capricornian                                                        |
+| 814         | CUA         | Credit Union Australia                                              |
+| 815         | PCU         | Police Bank                                                         |
+| 817         | WCU         | Warwick Credit Union                                                |
+| 818         | COM         | Bank of Communications                                              |
+| 819         | IBK         | Industrial & Commercial Bank of China                               |
+| 823         | ENC         | Encompass Credit Union                                              |
+| 824         | STH         | Sutherland Credit Union                                             |
+| 825         | SKY         | Big Sky Building Society                                            |
+| 882         | MMP         | Maritime Mining & Power Credit Union                                |
+| 90          | APO         | Australia Post                                                      |
+| 913         | SSB         | State Street Bank & Trust Company                                   |
+| 917         | ARA         | Arab Bank Australia                                                 |
+| 918         | MCB         | Mizuho Bank                                                         |
+| 922         | UOB         | United Overseas Bank                                                |
+| 923 or 936  | ING or GNI  | ING Bank                                                            |
+| 931         | ICB         | Mega International Commercial Bank                                  |
+| 932         | NEC         | Community Mutual                                                    |
+| 939         | AMP         | AMP Bank                                                            |
+| 941         | BCY         | Delphi Bank (division of Bendigo and Adelaide Bank)                 |
+| 942         | LBA         | Bank of Sydney                                                      |
+| 943         | TBB         | Taiwan Business Bank                                                |
+| 944         | MEB         | Members Equity Bank                                                 |
+| 946         | UBS         | UBS AG                                                              |
+| 951         | INV         | Investec Bank (Australia)                                           |
+| 952         | RBS         | Royal Bank of Scotland                                              |
+| 969         | MSL         | Tyro Payments                                                       |
+| 980         | BOC         | Bank of China Australia                                             |
+
+
 
 # Licence
 
