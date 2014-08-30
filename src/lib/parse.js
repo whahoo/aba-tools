@@ -4,6 +4,13 @@ var moment = require('moment');
 
 var parse = {};
 
+//task: rename to not parse
+//parse infers something different
+//could be getField.default etc
+//getField makes sense, similar to others
+
+//task: move the justify part to this code
+
 parse.default = function parseValue(value) {
   console.log('this', this, 'value', value);
   var self = this;//will be the column definition
