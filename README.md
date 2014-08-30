@@ -4,13 +4,72 @@ This is a Node module to support the generation of ABA files.
 An ABA file is the most common way in Australia to import batch transactions to use for online banking.
 This is different from the American Bankers Asciation format.
 
-## Usage
+## Version
+Current Version: 0.0.2
 
-Currently this is not usable, still building.
+## Installation
+
+**Currently this is not usable, still building.**
 
 ```bash
   npm install aba-tools
 ```
+
+... install & then load with require('something')
+```javascript
+  var ABA = require('aba-tools');
+```
+
+## Examples
+
+
+### Basic Example
+then use
+
+```javascript
+  //add ABA to your node file
+  var ABA = require('aba-tools');
+
+  // build the descriptive record
+  var descriptiveRecord = {
+    sequence: 3,//sequence is...
+    ///more
+  };
+
+  // build the detail records
+  var detailRecords = [];
+  detailRecords.push({
+    amount: 321.0133, //this will be rounded on conversion
+  })
+
+  //generate the file
+  var myABAFile = *new?* ABA.generate({..},[]);
+  
+  myAbaFile.result;
+  //output: large multiline text with the entire file
+
+  myAbaFile.lines;
+  //output: array of text strings, representing each line
+  //['line1', 'line2']
+
+```
+
+### Complex Example
+using credits & debits
+generating your own file from the output
+
+
+## Record Types & Usage
+
+### Descriptive Record
+
+Full docs about this and what should be provided, what each thing means
+
+### Detail Record
+
+Full docs about this and what should be provided, what each thing means
+
+
 
 # ABA (Cemtex) File Format
 Source: http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
