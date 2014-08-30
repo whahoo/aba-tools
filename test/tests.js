@@ -1,4 +1,6 @@
 "use strict"
+/*IMPORTANT: this is all broken since change to Joi, need to rebuild*/
+
 //external
 var assert = require('assert');
 var path = require('path');

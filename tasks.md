@@ -1,8 +1,12 @@
 Tasks
 ------
  - [x] ~~Software Licence~~
- - [ ] Set up config for other record types
- - [ ] Set up core to empty file
- - [x] ~~Set up tests (Jasmine or cucumber or http://qunitjs.com/)~~ (ended up with mocha )
- - [ ] Set up grunt (adding licence to files & version numbers)
+ - [x] ~~Set up config for other record types~~
+ - [x] ~~Set up tests (Jasmine or cucumber or http://qunitjs.com/)~~ (used mocha)
+ - [ ] More Complex validation required for transaction codes
+ - [ ] Set up totals to work, assuming 53 only (credit/debit)
+ - [ ] Set up code to build basic file from correct input
+ - [ ] Rebuild tests from the change to Joi
+ - [ ] Set up grunt (adding licence to files & version numbers) or research gulp
+ - [ ] Implement semver (update readme.md & start using versioning)
  - [ ] Investigate https://travis-ci.org/ for running tests
