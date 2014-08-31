@@ -33,7 +33,7 @@ function getEntry (value, column) {
     } else {
       //this should be a function based on the column.parse
       value = column['format'](value);
-      value = justifyValue(value, column.size, column.fill, column.justify);
+      result = justifyValue(value, column.size, column.fill, column.justify);
     }
   });
   //always return something
