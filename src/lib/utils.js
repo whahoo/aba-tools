@@ -9,6 +9,19 @@ var config = require('./config');
 var recordTypes = config.recordTypes;
 var recordTypeNames = config.recordTypeNames;
 
+
+//task: move the justify part to this code
+//justifying is the last step, this pads with zeros or spaces
+function justifyValue (value, size, fill, justify) {
+  var result;
+  if (justify === 'right') {
+    result = S(value).padLeft(size, fill).s;
+  } else {
+    result = S(value).padRight(size, fill).s;
+  }
+  return result;
+};
+
 //Return a fully parsed entry as a string
 //This processes an entry based on a column object
 function getEntry (value, column) {
@@ -19,14 +32,8 @@ function getEntry (value, column) {
       throw error;
     } else {
       //this should be a function based on the column.parse
-      value = column['parse'](value);;
-      //justifying is the last step, this pads with zeros or spaces
-      //task: this should be moved to the parse function (in all of them)
-      if (column.justify === 'right') {
-        result = S(value).padLeft(column.size, column.fill).s;
-      } else {
-        result = S(value).padRight(column.size, column.fill).s;
-      }
+      value = column['format'](value);
+      value = justifyValue(value, column.size, column.fill, column.justify);
     }
   });
   //always return something
@@ -77,9 +84,9 @@ function getRecord (type, values) {
         throw error
       } else {
         //add tye type & typeId to the values sent to getColmns
-        var values = _.extend(values, { type: type, typeId: recordTypes[type].id }),
+        var values = _.extend({ type: type, typeId: recordTypes[type].id }, response);
+        console.log('value after processing ', values);
         result = getColumns(values, columns);
-        );
       }
     }
   );
@@ -92,45 +99,6 @@ function getRecord (type, values) {
   return result;
 }
 
-function createABA (descriptiveRecord, detailRecords) {
-  var descriptiveRecord = {
-    sequence: 3,
-    bank: 'QBL',
-    userName: 'Transport Co',
-    userId: '12377',
-    description: 'Payments',
-    date: new Date,
-  };
-  /*
-    task: create this function
-    single descriptive record like above
-    array of objects that represent detailrecords
-    return an object like the one below
-  */
-  return {
-    //not sure on best convetion
-    //current thoughts...
-    result: "large multi line string",//can I do this?
-    lines: [
-      'first row as descriptive record',
-      'one or more detail records',
-      'total record',
-    ],
-    //descriptiveRecord: descriptiveRecord,// include original sent?
-    //detailRecords: detailRecords, //include original?
-    //if I end up doing an ABA.
-    totals: {
-      net: 123.00,
-      credit: 456.00,
-      debit: 789.00,
-      count: 23,
-    },
-};
-
-//task: how to expand the api for future
-// ABA.generate(...) as above
-// ABA.validate(big multi line string or array of lines)
-// ABA.parse // might mean I need to rename the parse functions
 
 exports.getEntry = getEntry;
 exports.getColumns = getColumns;

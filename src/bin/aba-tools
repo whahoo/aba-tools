@@ -10,8 +10,10 @@
 var path = require('path');
 var fs = require('fs');
 var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+var ABA = require(lib+'/main.js');
 
-var goodRecordOptions = {
+
+var myDescriptiveRecord = {
   sequence: 1,
   bank: 'WBC',
   userName: 'LIFE CHURCH',
@@ -20,7 +22,7 @@ var goodRecordOptions = {
   //date: '311214',
 };
 
-var detailRecordValues = {
+var myDetailRecordValues = [{
   fromName: 'Transport Co',
   fromBsb: '034-069',
   fromAcc: '3392881',
@@ -32,9 +34,9 @@ var detailRecordValues = {
   toBsb: '189-213',
   toAcc: '009872',
   //tax: ,
-};
+}];
 
-var getRecord = require(lib+'/main.js').getRecord;
-
-console.log(getRecord('descriptive', goodRecordOptions));
-console.log(getRecord('detail', detailRecordValues));
+var fancyNewAba = new ABA(myDescriptiveRecord, myDetailRecordValues);
+console.log(fancyNewAba);
+console.log(fancyNewAba.lines());
+//console.log(getRecord('detail', detailRecordValues));
