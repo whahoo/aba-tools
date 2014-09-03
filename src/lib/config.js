@@ -111,13 +111,13 @@ config.recordTypes.detail.columns = [
   { size: 9, key: 'fromAcc', fill: ' ', justify: 'right', format: as.v },
   { size: 1, key: 'indicator', fill: ' ', format: as.v },
   { size: 2, key: 'transaction', format: as.v },
-  { size: 10, key: 'amount', fill: '0', justify: 'right', format: as.vmount },
+  { size: 10, key: 'amount', fill: '0', justify: 'right', format: as.amount },
   { size: 32, key: 'toName', fill: ' ', justify: 'left', format: as.v },
   { size: 18, key: 'toRef', fill: ' ', justify: 'left', format: as.v },
   { size: 7, key: 'toBsb', format: as.v },
   { size: 9, key: 'toAcc', fill: ' ', justify: 'right', format: as.v },
   { size: 16, key: 'fromName', fill: ' ', justify: 'left', format: as.v },
-  { size: 8, key: 'tax', fill: '0', justify: 'right', format: as.vmount },
+  { size: 8, key: 'tax', fill: '0', justify: 'right', format: as.amount },
 ];
 
 config.recordTypes.detail.schema = Joi.object().keys({
@@ -157,9 +157,9 @@ config.recordTypes.total.columns = [
   //Odd requirement, must always be '999-999' and only ever that
   { size: 7, blank: true,  format: as.bsbFill },
   { size: 12, blank: true, format: as.v },
-  { size: 10, key: 'totalNet', format: as.vmount },
-  { size: 10, key: 'totalCredit', format: as.vmount },
-  { size: 10, key: 'totalDebit', format: as.vmount },
+  { size: 10, key: 'totalNet', format: as.amount },
+  { size: 10, key: 'totalCredit', format: as.amount },
+  { size: 10, key: 'totalDebit', format: as.amount },
   { size: 24, blank: true, format: as.v },
   { size: 6, key: 'count', fill: '0', justify: 'right', format: as.v },
   { size: 40, blank: true, format: as.v },
