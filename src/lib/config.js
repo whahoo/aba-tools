@@ -41,7 +41,7 @@ var accountNumberRegex = /[0-9-]{1,9}/;
 config.column = { };
 
 //schema for a column object, each record has multiple columns of a set order
-config.column.schema = Joi.object().keys({
+config.column.schema = Joi.object().required().keys({
   //max column size 40, no columns are larger in the spec
   size: Joi.number().min(1).max(40).required(),
   //some columns are just fillers of space or zeros, this boolan does not g
@@ -79,7 +79,7 @@ config.recordTypes.descriptive.columns = [
   { size: 40, blank: true, format: as.v },
 ];
 
-config.recordTypes.descriptive.schema = Joi.object().keys({
+config.recordTypes.descriptive.schema = Joi.object().required().keys({
   //this seems to be just 1 most of the time
   sequence: Joi.number().min(1).max(99).required(),
   //this needs to be a three letter bank code eg. BQL or WBC
@@ -120,7 +120,7 @@ config.recordTypes.detail.columns = [
   { size: 8, key: 'tax', fill: '0', justify: 'right', format: as.amount },
 ];
 
-config.recordTypes.detail.schema = Joi.object().keys({
+config.recordTypes.detail.schema = Joi.object().required().keys({
   //originator's name will appear on other person's statement
   fromName: Joi.required(),
   //BSB for account to transfer from
@@ -165,7 +165,7 @@ config.recordTypes.total.columns = [
   { size: 40, blank: true, format: as.v },
 ];
 
-config.recordTypes.total.schema = Joi.object().keys({
+config.recordTypes.total.schema = Joi.object().required().keys({
   //all totals from the other 'detail' records'
   totalNet: Joi.number().min(1).max(99999999).required(),
   totalCredit: Joi.number().min(1).max(99999999).required(),
