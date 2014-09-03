@@ -1,30 +1,36 @@
+**Currently this is not usable, still building.**
+
 # ABA Tools
 
 This is a Node module to support the generation of ABA files.
 An ABA file is the most common way in Australia to import batch transactions to use for online banking.
-This is different from the American Bankers Asciation format.
+This is different from the American Bankers Association format.
 
 ## Version
 Current Version: 0.0.2
 
 ## Installation
 
-**Currently this is not usable, still building.**
+
+### NPM Installation
 
 ```bash
   npm install aba-tools
 ```
 
-... install & then load with require('something')
-```javascript
-  var ABA = require('aba-tools');
+
+### Meteor Package Installation
+
+```bash
+  meteor add albi:aba-tools
 ```
+
+
 
 ## Examples
 
 
 ### Basic Example
-then use
 
 ```javascript
   //add ABA to your node file
@@ -44,7 +50,7 @@ then use
 
   //generate the file
   var myABAFile = *new?* ABA.generate({..},[]);
-  
+
   myAbaFile.result;
   //output: large multiline text with the entire file
 
