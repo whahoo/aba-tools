@@ -4,6 +4,8 @@ Tasks
  - [x] ~~Set up config for other record types~~
  - [x] ~~Set up tests (Jasmine or cucumber or http://qunitjs.com/)~~ (used mocha)
  - [x] ~~rename parse functions to 'as' to clear up namespace~~
+ - [ ] Investigate a hybrid meteor/npm module (ie. if(meteor){thing = joe} else {var thing = require...})
+    - [ ] Probably set up a master branch & then an npm & meteor branch
  - [ ] More Complex validation required for transaction codes
  - [ ] Set up totals to work, assuming 53 only (credit/debit)
  - [ ] Set up code to build basic file from correct input
