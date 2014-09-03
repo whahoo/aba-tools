@@ -67,7 +67,6 @@ function getColumns (values, columns) {
 //each record has a type and that type determines the columns and validation
 function getRecord (type, values) {
   var result, type, values, columns;
-  columns = recordTypes[type].columns;
   //Type is either; 'descriptive', 'detail', 'file-total'
   //Type defaults to 'detail' as that will be the most common
   Joi.validate(type,
@@ -77,6 +76,7 @@ function getRecord (type, values) {
       type = response;
     }
   );
+  columns = recordTypes[type].columns;
   //validate the value object provided based on the schema for that record type
   Joi.validate(values, recordTypes[type].schema, config.joi,
     function (error, response) {
