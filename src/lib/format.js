@@ -1,13 +1,15 @@
 "use strict"
 //external
 var moment = require('moment');
+var _ = require('underscore');
 
 //simple set of functions for formatting field values
 var as = {};
 
 as.v = function formatAsValue(value) {
   var self = this;//will be the column definition
-  if (! value) {
+  if ( _.isUndefined(value) ) {
+    console.log(value);
     throw new Error('value is undefined');
   }
   return value.toString().trim().substr(0, self.size);
