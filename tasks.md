@@ -13,3 +13,4 @@ Tasks
  - [ ] Set up grunt (adding licence to files & version numbers) or research gulp
  - [ ] Implement semver (update readme.md & start using versioning)
  - [ ] Investigate https://travis-ci.org/ for running tests
+ - [ ] Better handling of BSB numbers, should be able to provide 033445 (no space) or 322 232 (with space)
