@@ -74,16 +74,31 @@ describe('# config', function () {
 describe('# utils', function () {
   var good = {
     descriptive: {},
+    detail: {},
     total: {},
   };
 
   good.descriptive.values = {
     sequence: 1,
     bank: 'WBC',
-    userName: 'LIFE CHURCH',
+    userName: 'TRANSPORT CO',
     userId: '212459',
     description: 'Payments',
     date: new Date(),
+  };
+
+  good.detail.values = {
+    fromName: 'Transport Co',
+    fromBsb: '034-213',
+    fromAcc: '991882',
+    toName: 'Billy Andrews',
+    toRef: 'INV 3217B',
+    toBsb: '117-213',
+    toAcc: '00112228',
+    //indicator: ' ',
+    transaction: 50,
+    amount: 1189.22,
+    //tax: ,
   };
 
   good.total.values = {
@@ -136,6 +151,76 @@ describe('# utils', function () {
       describe('date', function () {
         testBadInputs( 'descriptive', this.title, ['a', 'ab', 'abcd', '###', '23/12/2014'], good.descriptive.values);
       });
+
+  });
+
+  describe('detail record', function () {
+
+      describe('fromName', function () {
+        testBadInputs( 'detail', this.title,
+          ['not provided', null, undefined, {}, [], 0, 123],
+          good.detail.values
+        );
+      });
+
+      describe('fromBsb', function () {
+        testBadInputs( 'detail', this.title,
+          ['not provided', null, undefined, {}, [], 0, 123382, 'abc-def', 'WBC', '452 234', '305123'],
+          good.detail.values
+        );
+      });
+
+      describe('fromAcc', function () {
+        testBadInputs( 'detail', this.title,
+          ['not provided', null, undefined, {}, [], 0, 123382, 'abc-def', 'WBC'],
+          good.detail.values
+        );
+      });
+
+      describe('toName', function () {
+        testBadInputs( 'detail', this.title,
+          ['not provided', null, undefined, {}, [], 0, 'this is way way way way way too long'],
+          good.detail.values
+        );
+      });
+
+      describe('toBsb', function () {
+        // is similar enough for now to fromBsb
+      });
+
+      describe('toAcc', function () {
+        // is similar enough for now to fromAcc
+      });
+
+      describe('toRef', function () {
+        testBadInputs( 'detail', this.title,
+          ['not provided', null, undefined, {}, [], 0, ' Start With Spc', 'has-dashes', 'this is way too long'],
+          good.detail.values
+        );
+      });
+
+      describe('indicator', function () {
+        testBadInputs( 'detail', this.title,
+          [null, {}, [], 0, 'abc-def', 'M', 'Z'],
+          good.detail.values
+        );
+      });
+
+      describe('transaction', function () {
+        testBadInputs( 'detail', this.title,
+          [0, 14, null],
+          good.detail.values
+        );
+      });
+
+      describe('amount', function () {
+        // task
+      });
+
+      describe('tax', function () {
+        // task
+      });
+
 
   });
 
