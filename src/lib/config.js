@@ -1,5 +1,6 @@
 "use strict"
 //config.js :: all static config, no functions, serves as coded version of spec
+//no functions should be in this file
 //http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
 
 //external
