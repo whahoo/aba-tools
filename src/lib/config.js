@@ -13,6 +13,7 @@ var config = {};
 config.joi = {
   abortEarly: false,
   stripUnknown: true,
+  convert: true,
 };
 
 config.recordTypes = {
@@ -35,7 +36,7 @@ var firstColumn = {
 //http://en.wikipedia.org/wiki/Bank_State_Branch
 var bsbRegex = /^[0-9]{3}-[0-9]{3}$/;
 //account numbers in the spec can contain '-' and numbers
-var accountNumberRegex = /[0-9-]{1,9}/;
+var accountNumberRegex = /^[0-9-]{1,9}$/;
 
 
 config.column = { };
@@ -99,7 +100,7 @@ config.recordTypes.descriptive.schema = Joi.object().required().keys({
 
 //Detail Record
 //This record type is for the actual transaction, containing references
-// bank details and space for tax if using to submit aba to the ATO for PAYG
+//bank details and space for tax if using to submit aba to the ATO for PAYG
 //from and to make sense when making payments however, note:
 //this format can do a mix of credits & debits
 //from will be the originator, the account/bank/log in of the current user
@@ -109,7 +110,7 @@ config.recordTypes.detail.columns = [
   firstColumn,
   { size: 7, key: 'fromBsb', format: as.v },
   { size: 9, key: 'fromAcc', fill: ' ', justify: 'right', format: as.v },
-  { size: 1, key: 'indicator', fill: ' ', format: as.v },
+  { size: 1, key: 'indicator', fill: ' ', format: as.indicator },
   { size: 2, key: 'transaction', format: as.v },
   { size: 10, key: 'amount', fill: '0', justify: 'right', format: as.amount },
   { size: 32, key: 'toName', fill: ' ', justify: 'left', format: as.v },
@@ -122,7 +123,7 @@ config.recordTypes.detail.columns = [
 
 config.recordTypes.detail.schema = Joi.object().required().keys({
   //originator's name will appear on other person's statement
-  fromName: Joi.required(),
+  fromName: Joi.string().required(),
   //BSB for account to transfer from
   fromBsb: Joi.string().regex(bsbRegex).required(),
   //account number for account to transfer from
@@ -136,10 +137,7 @@ config.recordTypes.detail.schema = Joi.object().required().keys({
   //account number for account to transfer to
   toAcc: Joi.required(),
   //See readme for definition, single space or letter for this record's type
-  //indicator: Joi.string().default('sdfads'),
-  //task: having issues with it defaulting to a single space
-  //idea - resulf with a separate parse function?
-  indicator: Joi.string().valid([' ','N','W','X','Y']).required().default(' '),
+  indicator: Joi.string().valid(['N','W','X','Y']).optional(),
   //See readme, transaction code usually 53
   transaction: Joi.number().valid(
     [13,50,51,52,53,54,55,56,57]).optional().default(53),
@@ -171,7 +169,7 @@ config.recordTypes.total.schema = Joi.object().required().keys({
   totalCredit: Joi.number().min(1).max(99999999).required(),
   totalDebit: Joi.number().min(1).max(99999999).required(),
   //total count of records with type 1 (detail records) - ie. checksum
-  count: Joi.number().required(),
+  count: Joi.number().min(1).required(),
 });
 
 
