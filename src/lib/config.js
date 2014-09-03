@@ -84,7 +84,7 @@ config.recordTypes.descriptive.schema = Joi.object().required().keys({
   sequence: Joi.number().min(1).max(99).required(),
   //this needs to be a three letter bank code eg. BQL or WBC
   //readme.md or http://www.thebsbnumbers.com/ - List of Financial Institution Codes
-  bank: Joi.string().length(3).alphanum().uppercase().trim().required(),
+  bank: Joi.string().length(3).uppercase().trim().regex(/^[A-Z]{3}(?:List)?$/).required(),
   //usually the company name
   userName: Joi.string().allow(' ').min(1).max(26).trim().required(),
   //not 100% sure where this number comes from
