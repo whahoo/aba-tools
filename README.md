@@ -145,17 +145,17 @@ An ABA record is exactly 120 characters long (excluding new line characters).
 
 ### Transaction Codes
 
-| Code | Transaction Description                                                                 |
-|------|-----------------------------------------------------------------------------------------|
-| 13   | Externally initiated debit items                                                        |
-| 50   | Externally initiated credit items with the exception of those bearing Transaction Codes |
-| 51   | Australian Government Security Interest                                                 |
-| 52   | Family Allowance                                                                        |
-| 53   | Pay                                                                                     |
-| 54   | Pension                                                                                 |
-| 55   | Allotment                                                                               |
-| 56   | Dividend                                                                                |
-| 57   | Debenture/Note Interest                                                                 |
+| Code | Credit/Debit | Transaction Description                                                                 |
+|------|--------------|-----------------------------------------------------------------------------------------|
+| 13   | Debit        | Externally initiated debit items                                                        |
+| 50   | Credit       | Externally initiated credit items with the exception of those bearing Transaction Codes |
+| 51   | Credit       | Australian Government Security Interest                                                 |
+| 52   | Credit       | Family Allowance                                                                        |
+| 53   | Credit       | Pay                                                                                     |
+| 54   | Credit       | Pension                                                                                 |
+| 55   | Credit       | Allotment                                                                               |
+| 56   | Credit       | Dividend                                                                                |
+| 57   | Credit       | Debenture/Note Interest                                                                 |
 
 ## Bank Codes
 Source: http://www.thebsbnumbers.com/
