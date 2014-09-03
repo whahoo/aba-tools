@@ -9,8 +9,12 @@ Tasks
  - [ ] More Complex validation required for transaction codes
  - [ ] Set up totals to work, assuming 53 only (credit/debit)
  - [ ] Set up code to build basic file from correct input
- - [ ] Rebuild tests from the change to Joi
- - [ ] Set up grunt (adding licence to files & version numbers) or research gulp
+ - [x] ~~Rebuild tests from the change to Joi~~
  - [ ] Implement semver (update readme.md & start using versioning)
- - [ ] Investigate https://travis-ci.org/ for running tests
  - [ ] Better handling of BSB numbers, should be able to provide 033445 (no space) or 322 232 (with space)
+
+
+Low Priority Tasks
+-----
+- [ ] Set up grunt (adding licence to files & version numbers) or research gulp
+- [ ] Investigate https://travis-ci.org/ for running tests
