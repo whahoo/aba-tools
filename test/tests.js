@@ -17,6 +17,8 @@ var getEntry = utils.getEntry;
 var getColumns = utils.getColumns;
 var getRecord = utils.getRecord;
 
+var ABA = require(lib + '/main');
+
 
 function testBadInputs (recordType, fieldKey, badInputs, values) {
   var badInputs = badInputs || [];
@@ -39,6 +41,7 @@ function testBadInputs (recordType, fieldKey, badInputs, values) {
     });
   });
 };
+
 
 // configuration integrity tests
 
@@ -273,5 +276,40 @@ describe('# utils', function () {
     });
 
   });
+
+});
+
+
+describe ('#ABA', function () {
+  //mocha -g 'ABA';
+
+  var myDetailRecordValues = [{
+    fromName: 'Transport Co',
+    fromBsb: '034-069',
+    fromAcc: '3392881',
+    indicator: ' ',
+    //transaction: ,
+    amount: 30199.00,
+    toName: 'Leryooy Jenkins',
+    toRef: 'INV 1235B',
+    toBsb: '189-213',
+    toAcc: '009872',
+    //tax: ,
+  }];
+
+
+  var myDescriptiveRecord = {
+    sequence: 1,
+    bank: 'WBC',
+    userName: 'LIFE CHURCH',
+    userId: '252359',
+    description: 'Payments',
+    //date: '311214',
+  };
+
+  var fancyNewAba = new ABA(myDescriptiveRecord, myDetailRecordValues);
+  console.log(fancyNewAba);
+  console.log(fancyNewAba.lines());
+
 
 });
