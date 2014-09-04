@@ -1,0 +1,32 @@
+{
+  "name": "aba-tools",
+  "version": "0.0.3",
+  "description": "Creates ABA files (Cemtex format) for batch banking in Australia",
+  "main": "./src/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lb-/aba-tools.git"
+  },
+  "keywords": [
+    "aba",
+    "bank",
+    "australia",
+    "cemtex",
+    "format",
+    "banking",
+    "bankers",
+    "association"
+  ],
+  "author": "LB Ben Johnston (mail@lb.ee)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lb-/aba-tools/issues"
+  },
+  "homepage": "https://github.com/lb-/aba-tools"
+}
