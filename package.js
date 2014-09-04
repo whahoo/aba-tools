@@ -1,5 +1,6 @@
 //potential idea
 //if (typeof module === 'undefined') {   }
+//no need, just using .npmignore
 
 /*Meteor Package Definition*/
 
@@ -51,6 +52,7 @@ Package.onTest(function (api) {
 });
 
 /* This lets you use npm packages in your package*/
+//task: will need to add joi here, unless i want to make my own meteor pckg for it?
 Npm.depends({
   simplesmtp: "0.3.10",
   "stream-buffers": "0.2.5"});
