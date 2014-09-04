@@ -9,9 +9,9 @@
 
 if (typeof Meteor === 'undefined' /*import if npm*/) {
   //internal
-  var utils = require('./utils');
-  var getEntry = utils.getEntry;
-  var getRecord = utils.getRecord;
+  var helpers = require('./helpers');
+  var getEntry = helpers.getEntry;
+  var getRecord = helpers.getRecord;
 }
 
 //createABA will take a description object and one or more detail objects
@@ -30,7 +30,7 @@ function ABA (descriptiveRecord, detailRecords) {
   self.descriptiveRecord = descriptiveRecord || null;
   if ( self.descriptiveRecord ) {
     console.log(self.descriptiveRecord);
-    self.descriptiveLine = utils.getRecord('descriptive', self.descriptiveRecord);
+    self.descriptiveLine = helpers.getRecord('descriptive', self.descriptiveRecord);
   } else {
     throw Error('descriptiveRecord must be provided')
   }

@@ -7,7 +7,7 @@ if (typeof Meteor === 'undefined' /*import if npm*/) {
   //external
   var Joi = require('joi');
   //internal
-  var as = require('./format');
+  var as = require('./as-format');
 }
 
 var config = {};

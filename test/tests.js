@@ -12,10 +12,10 @@ var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../src/lib');
 var config = require(lib + '/config');
 var recordTypes = config.recordTypes;
 var recordTypeNames = config.recordTypeNames;
-var utils = require(lib + '/utils');
-var getEntry = utils.getEntry;
-var getColumns = utils.getColumns;
-var getRecord = utils.getRecord;
+var helpers = require(lib + '/helpers');
+var getEntry = helpers.getEntry;
+var getColumns = helpers.getColumns;
+var getRecord = helpers.getRecord;
 
 var ABA = require(lib + '/main');
 
@@ -74,7 +74,7 @@ describe('# config', function () {
 });
 
 
-describe('# utils', function () {
+describe('# helpers', function () {
   var good = {
     descriptive: {},
     detail: {},
