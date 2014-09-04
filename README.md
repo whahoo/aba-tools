@@ -7,7 +7,7 @@ An ABA file is the most common way in Australia to import batch transactions to 
 This is different from the American Bankers Association format.
 
 ## Version
-Current Version: 0.0.2
+Current Version: 0.0.3
 
 ## Installation
 

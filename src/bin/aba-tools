@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /*!
- * ABA Generator v0.0.1
+ * ABA Generator v0.0.3
  * Copyright 2014 Ben (LB) Johnston <mail@lb.ee>
  * ISC license Licensed under MIT (https://github.com/lb-/aba-tools/blob/master/LICENCE)
  */
