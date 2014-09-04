@@ -17,4 +17,4 @@ Tasks
 Low Priority Tasks
 -----
 - [ ] Set up grunt (adding licence to files & version numbers) or research gulp
-- [ ] Investigate https://travis-ci.org/ for running tests
+- [ ] Investigate https://travis-ci.org/ for Continuous Integration good section near end here: http://evanhahn.com/make-an-npm-baby/
