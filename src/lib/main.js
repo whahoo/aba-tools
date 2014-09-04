@@ -1,10 +1,18 @@
+/*!
+ * ABA Generator v0.0.3
+ * Copyright 2014 Ben (LB) Johnston <mail@lb.ee>
+ * ISC license Licensed under MIT (https://github.com/lb-/aba-tools/blob/master/LICENCE)
+ */
+ 
 "use strict"
 //main.js :: main node module set up & export
 
-//internal
-var utils = require('./utils');
-var getEntry = utils.getEntry;
-var getRecord = utils.getRecord;
+if (typeof Meteor !== 'undefined' /*import if npm*/) {
+  //internal
+  var utils = require('./utils');
+  var getEntry = utils.getEntry;
+  var getRecord = utils.getRecord;
+}
 
 //createABA will take a description object and one or more detail objects
 //it will return a formatted aba file multi-line text object
@@ -43,4 +51,7 @@ ABA.prototype.lines = function exportABA() {
   return ["long long string with things in it: ", "other line"];
 };
 
-module.exports = ABA;
+
+if (typeof module !== 'undefined') {
+  module.exports = ABA;
+}

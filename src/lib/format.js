@@ -1,7 +1,11 @@
 "use strict"
-//external
-var moment = require('moment');
-var _ = require('underscore');
+
+if (typeof Meteor !== 'undefined' /*import if npm*/) {
+  //external
+  var moment = require('moment');
+  var _ = require('underscore');
+}
+
 
 //simple set of functions for formatting field values
 var as = {};
@@ -37,4 +41,7 @@ as.bsbFill = function () {
   return '999-999';
 }
 
-module.exports = as;
+
+if (typeof module !== 'undefined') {
+  module.exports = as;
+}

@@ -1,14 +1,16 @@
 "use strict"
-//external
-var _ = require('underscore');
-var S = require('string');
-var Joi = require('joi');
 
-//internal
-var config = require('./config');
-var recordTypes = config.recordTypes;
-var recordTypeNames = config.recordTypeNames;
+if (typeof Meteor !== 'undefined' /*import if npm*/) {
+  //external
+  var _ = require('underscore');
+  var S = require('string');
+  var Joi = require('joi');
 
+  //internal
+  var config = require('./config');
+  var recordTypes = config.recordTypes;
+  var recordTypeNames = config.recordTypeNames;
+}
 
 //task: move the justify part to this code
 //justifying is the last step, this pads with zeros or spaces
@@ -99,7 +101,8 @@ function getRecord (type, values) {
   return result;
 }
 
-
-exports.getEntry = getEntry;
-exports.getColumns = getColumns;
-exports.getRecord = getRecord;
+if (typeof module !== 'undefined') {
+  exports.getEntry = getEntry;
+  exports.getColumns = getColumns;
+  exports.getRecord = getRecord;
+}

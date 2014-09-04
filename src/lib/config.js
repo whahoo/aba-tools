@@ -3,11 +3,12 @@
 //no functions should be in this file
 //http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
 
-//external
-var Joi = require('joi');
-
-//internal
-var as = require('./format');
+if (typeof Meteor !== 'undefined' /*import if npm*/) {
+  //external
+  var Joi = require('joi');
+  //internal
+  var as = require('./format');
+}
 
 var config = {};
 
@@ -174,4 +175,6 @@ config.recordTypes.total.schema = Joi.object().required().keys({
 });
 
 
-module.exports = config;
+if (typeof module !== 'undefined') {
+  module.exports = config;
+}
