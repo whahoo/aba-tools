@@ -7,13 +7,13 @@
     "test": "test"
   },
   "devDependencies": {
-    "mocha": "*",
+    "mocha": "*"
   },
   "dependencies": {
     "underscore": "*",
     "joi": "*",
-    "string": "*",
-    "moment": "*",
+    "underscore.string": "*",
+    "moment": "*"
   },
   "engines": {
     "node": "*"

@@ -3,7 +3,7 @@
 if (typeof Meteor === 'undefined' /*import if npm*/) {
   //external
   var _ = require('underscore');
-  var S = require('string');
+  var _s = require('underscore.string');
   var Joi = require('joi');
 
   //internal
@@ -12,14 +12,13 @@ if (typeof Meteor === 'undefined' /*import if npm*/) {
   var recordTypeNames = config.recordTypeNames;
 }
 
-//task: move the justify part to this code
 //justifying is the last step, this pads with zeros or spaces
 function justifyValue (value, size, fill, justify) {
   var result;
   if (justify === 'right') {
-    result = S(value).padLeft(size, fill).s;
+    result = _s.lpad(value, size, fill);
   } else {
-    result = S(value).padRight(size, fill).s;
+    result = _s.rpad(value, size, fill);
   }
   return result;
 };

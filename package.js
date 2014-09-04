@@ -19,6 +19,11 @@ Package.describe({
 
 /* This defines your actual package */
 Package.onUse(function (api) {
+  //task to add
+  // underscore
+  // joi (might not be a meteor packag yet)
+  // underscore string
+  // moment
   // If no version is specified for an 'api.use' dependency, use the
   // one defined in Meteor 0.9.0.
   api.versionsFrom('0.9.0');
