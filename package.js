@@ -1,14 +1,21 @@
+//potential idea
+//if (typeof module === 'undefined') {   }
+
+/*Meteor Package Definition*/
+
 /* Information about this package */
 Package.describe({
   // Short two-sentence summary.
-  summary: "What this does",
+  summary: "Creates ABA files (Cemtex format) for batch banking in Australia",
   // Version number.
-  version: "1.0.0",
+  version: "0.0.3",
   // Optional.  Default is package directory name.
-  name: "username:package-name",
+  name: "albi:aba-tools",
   // Optional github URL to your source repository.
-  git: "https://github.com/something/something.git",
+  git: "https://github.com/lb-/aba-tools.git",
 });
+
+/*task*/
 
 /* This defines your actual package */
 Package.onUse(function (api) {
