@@ -3,7 +3,7 @@
 //no functions should be in this file
 //http://www.cemtexaba.com/aba-format/cemtex-aba-file-format-details.html
 
-if (typeof Meteor !== 'undefined' /*import if npm*/) {
+if (typeof Meteor === 'undefined' /*import if npm*/) {
   //external
   var Joi = require('joi');
   //internal

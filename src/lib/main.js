@@ -3,11 +3,11 @@
  * Copyright 2014 Ben (LB) Johnston <mail@lb.ee>
  * ISC license Licensed under MIT (https://github.com/lb-/aba-tools/blob/master/LICENCE)
  */
- 
+
 "use strict"
 //main.js :: main node module set up & export
 
-if (typeof Meteor !== 'undefined' /*import if npm*/) {
+if (typeof Meteor === 'undefined' /*import if npm*/) {
   //internal
   var utils = require('./utils');
   var getEntry = utils.getEntry;

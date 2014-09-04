@@ -1,6 +1,6 @@
 "use strict"
 
-if (typeof Meteor !== 'undefined' /*import if npm*/) {
+if (typeof Meteor === 'undefined' /*import if npm*/) {
   //external
   var _ = require('underscore');
   var S = require('string');
