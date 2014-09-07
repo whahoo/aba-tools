@@ -288,7 +288,7 @@ describe ('#ABA', function () {
     fromName: 'Transport Co',
     fromBsb: '034-069',
     fromAcc: '3392881',
-    indicator: ' ',
+    //indicator: ' ',
     //transaction: ,
     amount: 30199.00,
     toName: 'Leryooy Jenkins',
@@ -296,7 +296,33 @@ describe ('#ABA', function () {
     toBsb: '189-213',
     toAcc: '009872',
     //tax: ,
+  },{
+    fromName: 'Transport Co',
+    fromBsb: '034-069',
+    fromAcc: '3392881',
+    //indicator: ' ',
+    //transaction: ,
+    amount: 1103.20,
+    toName: 'Jeffson Angus',
+    toRef: 'Reimbursement',
+    toBsb: '673-213',
+    toAcc: '10118821',
+    //tax: ,
   }];
+
+  var myDetailRecord = {
+    fromName: 'Transport Co',
+    fromBsb: '034-069',
+    fromAcc: '3392881',
+    //indicator: ' ',
+    //transaction: ,
+    amount: 220.13,
+    toName: 'Printing Co.',
+    toRef: 'PX11081',
+    toBsb: '901-109',
+    toAcc: '39810029',
+    //tax: ,
+  }
 
 
   var myDescriptiveRecord = {
@@ -308,9 +334,13 @@ describe ('#ABA', function () {
     //date: '311214',
   };
 
-  var fancyNewAba = new ABA(myDescriptiveRecord, myDetailRecordValues);
-  console.log(fancyNewAba);
-  console.log(fancyNewAba.lines());
+  //var fancyNewAba = new ABA(myDescriptiveRecord, myDetailRecordValues);
+  var fancyNewAba = new ABA();
+  fancyNewAba.addDescriptiveRecord(myDescriptiveRecord);
+  fancyNewAba.addDetailRecords(myDetailRecordValues);
+  fancyNewAba.addRecord('detail', myDetailRecord);
+  //console.log(fancyNewAba);
+  console.log(fancyNewAba.export());
 
 
 });
