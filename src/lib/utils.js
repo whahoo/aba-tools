@@ -15,6 +15,24 @@ if (typeof Meteor === 'undefined' /*import if npm*/) {
 
 var utils = {};
 
+utils.checkType = function checkType (type, excludeTotal) {
+  var type = type || null;
+  var excludeTotal = excludeTotal || false;
+  //Type is either; 'descriptive', 'detail', 'file-total'
+  //Type defaults to 'detail' as that will be the most common
+  if (excludeTotal) {
+    recordTypeNames = _.without(_.clone(recordTypeNames), 'total');
+  };
+  Joi.validate(type,
+    Joi.valid(recordTypeNames).default('detail').optional(),
+    config.joi, function (error, response) {
+      if (error) throw error;
+      type = response;
+    }
+  );
+  return type;
+}
+
 //justifying is the last step, this pads with zeros or spaces
 utils.justifyValue = function justifyValue (value, size, fill, justify) {
   var result;
@@ -71,15 +89,7 @@ utils.getColumns = function getColumns (values, columns) {
 //each record has a type and that type determines the columns and validation
 utils.getRecord = function getRecord (type, values) {
   var result, type, values, columns;
-  //Type is either; 'descriptive', 'detail', 'file-total'
-  //Type defaults to 'detail' as that will be the most common
-  Joi.validate(type,
-    Joi.valid(recordTypeNames).default('detail').optional(),
-    config.joi, function (error, response) {
-      if (error) throw error;
-      type = response;
-    }
-  );
+  type = utils.checkType(type);
   columns = recordTypes[type].columns;
   //validate the value object provided based on the schema for that record type
   Joi.validate(values, recordTypes[type].schema, config.joi,
@@ -89,7 +99,7 @@ utils.getRecord = function getRecord (type, values) {
       } else {
         //add tye type & typeId to the values sent to getColmns
         var values = _.extend({ type: type, typeId: recordTypes[type].id }, response);
-        console.log('value after processing ', values);
+        //console.log('value after processing ', values);
         result = utils.getColumns(values, columns);
       }
     }
