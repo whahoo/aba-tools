@@ -1,5 +1,7 @@
 Tasks
 ------
+ - [x] ~~Update folders; src/main.js & then lib/all-others & rename helpers back to utils~~
+ - [x] ~~utils should export one thing only, so utils.getSomething etc~~
  - [x] ~~Software Licence~~
  - [x] ~~Set up config for other record types~~
  - [x] ~~Set up tests (Jasmine or cucumber or http://qunitjs.com/)~~ (used mocha)

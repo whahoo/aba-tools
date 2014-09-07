@@ -1,5 +1,6 @@
 "use strict"
 
+
 if (typeof Meteor === 'undefined' /*import if npm*/) {
   //external
   var _ = require('underscore');
@@ -12,8 +13,10 @@ if (typeof Meteor === 'undefined' /*import if npm*/) {
   var recordTypeNames = config.recordTypeNames;
 }
 
+var utils = {};
+
 //justifying is the last step, this pads with zeros or spaces
-function justifyValue (value, size, fill, justify) {
+utils.justifyValue = function justifyValue (value, size, fill, justify) {
   var result;
   if (justify === 'right') {
     result = _s.lpad(value, size, fill);
@@ -25,7 +28,7 @@ function justifyValue (value, size, fill, justify) {
 
 //Return a fully parsed entry as a string
 //This processes an entry based on a column object
-function getEntry (value, column) {
+utils.getEntry = function getEntry (value, column) {
   var value, column, result;
   //check that the column is valid according to the schema
   Joi.validate(column, config.column.schema, config.joi, function (error, response) {
@@ -34,7 +37,7 @@ function getEntry (value, column) {
     } else {
       //this should be a function based on the column.parse
       value = column['format'](value);
-      result = justifyValue(value, column.size, column.fill, column.justify);
+      result = utils.justifyValue(value, column.size, column.fill, column.justify);
     }
   });
   //always return something
@@ -44,7 +47,7 @@ function getEntry (value, column) {
 
 
 //For an object of values and an array of columns process each column
-function getColumns (values, columns) {
+utils.getColumns = function getColumns (values, columns) {
   var values, columns, result;
   result = '';
   if (columns.length < 8 ) {
@@ -56,7 +59,7 @@ function getColumns (values, columns) {
       if (column.key) {
         value = values[column.key];
       }
-      result += getEntry(value, column);
+      result += utils.getEntry(value, column);
     });
   }
   //always return something
@@ -66,7 +69,7 @@ function getColumns (values, columns) {
 
 //returns a record, which is essentially a row in the final ABA file
 //each record has a type and that type determines the columns and validation
-function getRecord (type, values) {
+utils.getRecord = function getRecord (type, values) {
   var result, type, values, columns;
   //Type is either; 'descriptive', 'detail', 'file-total'
   //Type defaults to 'detail' as that will be the most common
@@ -87,7 +90,7 @@ function getRecord (type, values) {
         //add tye type & typeId to the values sent to getColmns
         var values = _.extend({ type: type, typeId: recordTypes[type].id }, response);
         console.log('value after processing ', values);
-        result = getColumns(values, columns);
+        result = utils.getColumns(values, columns);
       }
     }
   );
@@ -101,7 +104,5 @@ function getRecord (type, values) {
 }
 
 if (typeof module !== 'undefined') {
-  exports.getEntry = getEntry;
-  exports.getColumns = getColumns;
-  exports.getRecord = getRecord;
+  module.exports = utils;
 }

@@ -8,16 +8,17 @@ var _ = require('underscore');
 var Joi = require('joi');
 
 //internal
+var src = path.join(path.dirname(fs.realpathSync(__filename)), '../src');
 var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../src/lib');
 var config = require(lib + '/config');
 var recordTypes = config.recordTypes;
 var recordTypeNames = config.recordTypeNames;
-var helpers = require(lib + '/helpers');
-var getEntry = helpers.getEntry;
-var getColumns = helpers.getColumns;
-var getRecord = helpers.getRecord;
+var utils = require(lib + '/utils');
+var getEntry = utils.getEntry;
+var getColumns = utils.getColumns;
+var getRecord = utils.getRecord;
 
-var ABA = require(lib + '/main');
+var ABA = require(src + '/main');
 
 
 function testBadInputs (recordType, fieldKey, badInputs, values) {
@@ -74,7 +75,7 @@ describe('# config', function () {
 });
 
 
-describe('# helpers', function () {
+describe('# utils', function () {
   var good = {
     descriptive: {},
     detail: {},
