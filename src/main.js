@@ -22,9 +22,9 @@ if (typeof Meteor === 'undefined' /*import if npm*/) {
 function ABA () {
   var self = this;
   self.totals = {
-    net: 0.0,
-    credit: 0.0,
-    debit: 0.0,
+    totalNet: 0.0,
+    totalCredit: 0.0,
+    totalDebit: 0.0,
     count: 0,
   };
 
@@ -41,6 +41,15 @@ function ABA () {
   //internal functions
   self._process = function procesABA () {
     //console.log(self.descriptiveLine, self.descriptiveLines);
+	self.totals['totalDebit'] = self.detailRecords.reduce( (total, rec) => {
+		return (rec['transaction'] == '13') ? total + rec['amount']: 0;
+	},0.0);
+	self.totals['totalCredit'] = self.detailRecords.reduce( (total, rec) => {
+		return (rec['transaction'] != '13') ? total + rec['amount']: 0;
+	},0.0);
+	self.totals['totalNet'] = self.totals['totalCredit'] - self.totals['totalDebit'];
+	self.totals['count'] = self.detailRecords.length; 
+	self.totalLine = _utils.getRecord('total', self.totals);
   };
 
   //api functions
