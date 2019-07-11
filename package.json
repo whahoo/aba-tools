@@ -2,7 +2,7 @@
   "name": "aba-tools",
   "version": "0.0.3",
   "description": "Creates ABA files (Cemtex format) for batch banking in Australia",
-  "main": "./src/lib/main.js",
+  "main": "./src/main.js",
   "directories": {
     "test": "test"
   },
