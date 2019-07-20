@@ -216,9 +216,21 @@ config.recordTypes.total.columns = [
   //Odd requirement, must always be '999-999' and only ever that
   { size: 7, blank: true, format: as.bsbFill },
   { size: 12, blank: true, format: as.v },
-  { size: 10, key: "totalNet", fill: "0", format: as.amount },
-  { size: 10, key: "totalCredit", fill: "0", format: as.amount },
-  { size: 10, key: "totalDebit", fill: "0", format: as.amount },
+  { size: 10, key: "totalNet", fill: "0", justify: "right", format: as.amount },
+  {
+    size: 10,
+    key: "totalCredit",
+    fill: "0",
+    justify: "right",
+    format: as.amount
+  },
+  {
+    size: 10,
+    key: "totalDebit",
+    fill: "0",
+    justify: "right",
+    format: as.amount
+  },
   { size: 24, blank: true, format: as.v },
   { size: 6, key: "count", fill: "0", justify: "right", format: as.v },
   { size: 40, blank: true, format: as.v }
