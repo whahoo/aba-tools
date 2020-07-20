@@ -50,7 +50,7 @@ utils.getEntry = function getEntry(in_value, column) {
   //check that the column is valid according to the schema
   const { error, value } = config.column.schema.validate(column, config.joi);
   if (error) throw error;
-  in_value = column["format"](value);
+  in_value = column["format"](in_value);
   result = utils.justifyValue(
     in_value,
     column.size,
